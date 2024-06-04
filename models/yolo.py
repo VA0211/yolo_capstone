@@ -399,7 +399,7 @@ def parse_model(d, ch):
             Conv,
             GhostConv,
             Bottleneck,
-            # GhostBottleneck,
+            GhostBottleneck,
             SPP,
             SPPF,
             DWConv,
@@ -428,8 +428,8 @@ def parse_model(d, ch):
             if m in {BottleneckCSP, C3, C3TR, C3Ghost, C3x}:
                 args.insert(2, n)  # number of repeats
                 n = 1
-        elif m is GhostBottleneck:
-            c1, c2, k, s = args[0], args[1], args[2], args[3]
+            if m is GhostBottleneck:
+                c1, c2, k, s = args[0], args[1], args[2], args[3]
         elif m is nn.BatchNorm2d:
             args = [ch[f]]
         elif m is Concat:
