@@ -13,28 +13,28 @@ anchors:
 backbone:
   # [from, number, module, args]
   [
-    [-1, 1, Focus, [32, 3]],  # 0: Focus layer
-    [-1, 1, Conv, [64, 3, 2]],  # 1: Conv layer
-    [-1, 1, GhostBottleneck, [64, 64, 3, 1]],  # 2: G-bneck layer
-    [-1, 1, GhostBottleneck, [64, 128, 3, 2]],  # 3: G-bneck layer
-    [-1, 1, GhostBottleneck, [128, 128, 3, 1]],  # 4: G-bneck layer
-    [-1, 1, GhostBottleneck, [128, 256, 3, 2]],  # 5: G-bneck layer
-    [-1, 1, GhostBottleneck, [256, 256, 3, 1]],  # 6: G-bneck layer
-    [-1, 1, Conv, [256, 512, 3, 2]],  # 7: Conv layer
+    [-1, 1, Focus, [3, 32, 1, 1]],  # 0: Focus layer
+    [-1, 1, Conv, [32, 64, 3, 2]],  # 1: Conv layer
+    [-1, 1, GhostBottleneck, [64, 3, 1]],  # 2: G-bneck layer
+    [-1, 1, GhostBottleneck, [128, 3, 2]],  # 3: G-bneck layer
+    [-1, 1, GhostBottleneck, [128, 3, 1]],  # 4: G-bneck layer
+    [-1, 1, GhostBottleneck, [256, 3, 2]],  # 5: G-bneck layer
+    [-1, 1, GhostBottleneck, [256, 3, 1]],  # 6: G-bneck layer
+    [-1, 1, Conv, [512, 3, 2]],  # 7: Conv layer
     [-1, 1, SPP, [512]],  # 8: SPP layer
   ]
 
 # YOLOv5 v6.0 head
 head: [
-    [2, 1, Conv, [64, 128, 3, 1]],  # 9: Conv layer
-    [4, 1, Conv, [128, 256, 3, 1]],  # 10: Conv layer
+    [2, 1, Conv, [128, 3, 1]],  # 9: Conv layer
+    [4, 1, Conv, [256, 3, 1]],  # 10: Conv layer
 
     [[9, 10], 1, Concat, [1]], # 11: Concatenate layers 9 and 10
     [-1, 1, ASFF, [2]], # 12: ASFF_2 layer
     [11, 1, ASFF, [2]], # 13: ASFF_2 layer
 
-    [12, 1, GhostBottleneck, [64, 128, 3, 2]],  # 14: G-bneck layer
-    [13, 1, GhostBottleneck, [128, 256, 3, 2]],  # 15: G-bneck layer    
+    [12, 1, GhostBottleneck, [128, 3, 2]],  # 14: G-bneck layer
+    [13, 1, GhostBottleneck, [256, 3, 2]],  # 15: G-bneck layer    
     [8, 1, Conv, [512, 512, 3, 1]],  # 16: Conv layer
 
     [[22, 25, 28], 1, Concat, [1]],  # 17: Concatenate layers 14, 15, and 16
@@ -42,11 +42,11 @@ head: [
     [17, 1, ASFF, [3]], # 19: ASFF_3 layer
     [17, 1, ASFF, [3]], # 20: ASFF_3 layer
     
-    [18, 1, GhostBottleneck, [128, 128, 3, 1]],  # 21: G-bneck layer 
+    [18, 1, GhostBottleneck, [128, 3, 1]],  # 21: G-bneck layer 
     [-1, 1, LADH, [3]], # 22: LADH layer
-    [19, 1, GhostBottleneck, [256, 256, 3, 1]],  # 23: G-bneck layer 
+    [19, 1, GhostBottleneck, [256, 3, 1]],  # 23: G-bneck layer 
     [-1, 1, LADH, [3]], # 24: LADH layer
-    [20, 1, GhostBottleneck, [512, 512, 3, 1]],  # 25: G-bneck layer 
+    [20, 1, GhostBottleneck, [512, 3, 1]],  # 25: G-bneck layer 
     [-1, 1, LADH, [3]], # 26: LADH layer
 
     [[22, 24, 26], 1, Detect, [nc, anchors]], # Detect(P3, P4, P5)
