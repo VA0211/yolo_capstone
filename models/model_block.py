@@ -127,7 +127,7 @@ from torch import Tensor
 class Partial_conv3(nn.Module):
 
     def __init__(self, dim, n_div, forward):
-        super().__init__()
+        super(Partial_conv3, self).__init__()
         self.dim_conv3 = dim // n_div
         self.dim_untouched = dim - self.dim_conv3
         self.partial_conv3 = nn.Conv2d(self.dim_conv3, self.dim_conv3, 3, 1, 1, bias=False)
@@ -160,15 +160,15 @@ class FasterNetBlock(nn.Module):
     def __init__(self,
                  dim,
                  n_div,
-                 mlp_ratio,
-                 drop_path,
-                 layer_scale_init_value,
-                 act_layer,
-                 norm_layer,
-                 pconv_fw_type
+                 mlp_ratio=2.0,
+                 drop_path=0.1,
+                 layer_scale_init_value=None,
+                 act_layer=nn.BatchNorm2d,
+                 norm_layer=nn.ReLU,
+                 pconv_fw_type='split_cat'
                  ):
 
-        super().__init__()
+        super(FasterNetBlock, self).__init__()
         self.dim = dim
         self.mlp_ratio = mlp_ratio
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
