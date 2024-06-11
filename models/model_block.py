@@ -162,7 +162,7 @@ class FasterNetBlock(nn.Module):
                  n_div,
                  mlp_ratio=2.0,
                  drop_path=0.1,
-                 layer_scale_init_value=None,
+                 layer_scale_init_value=0,
                  act_layer=nn.GELU,
                  norm_layer=nn.BatchNorm2d,
                  pconv_fw_type='split_cat'
