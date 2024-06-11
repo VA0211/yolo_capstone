@@ -165,7 +165,7 @@ class FasterNetBlock(nn.Module):
                  layer_scale_init_value=0,
                  act_layer=nn.GELU,
                  norm_layer=nn.BatchNorm2d,
-                 pconv_fw_type='slicing'
+                 pconv_fw_type='split_cat'
                  ):
 
         super(FasterNetBlock, self).__init__()
