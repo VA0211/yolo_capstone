@@ -427,7 +427,7 @@ def parse_model(d, ch):
                 args = [ch[x] for x in f] + args  # Include input channels from multiple sources
             else:
                 args = [c1, c2, *args[1:]]
-            if m in {BottleneckCSP, C3, C3TR, C3Ghost, C3x, FasterNetBlock}:
+            if m in {BottleneckCSP, C3, C3TR, C3Ghost, C3x}:
                 args.insert(2, n)  # number of repeats
                 n = 1
         elif m is nn.BatchNorm2d:
